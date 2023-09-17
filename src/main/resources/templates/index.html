@@ -1,147 +1,159 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" lang="en">
+<html lang="en">
 <head>
-   <title>cv</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Input Form</title>
     <style>
-        * {
-            max-width: 700px;
-            margin: auto;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 40px;
         }
 
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-        /*body {
-            min-width: 500px;
-        }*/
+        h1 {
+            text-align: center;
+            color: #0077b6;
+        }
 
-        div {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1em;
         }
 
-        #header {
-            height: 40px;
-            width: 100%;
-            background-color: #ffcccc;
-            position: fixed;
-            z-index: 1;
+        input[type="file"] {
+            margin-bottom: 20px;
         }
 
-        #title {
-            margin-left: 3%;
+        input[type="submit"] {
+            background-color: #0077b6;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
         }
 
-        #footer {
-            height: 50px;
-            width: 100%;
-            background-color: #ffcccc;
-            clear: both;
-            position: relative;
+        input[type="submit"]:hover {
+            background-color: #005994;
+        }
+        .list-input {
+            display: flex;
+            align-items: center;
         }
 
-        .left {
-            height: 1000px;
-            width: 45px;
-            background-color: #e0eeee;
-            float: left;
-            position: fixed;
+        .list-input input {
+            flex: 1;
         }
 
-        .right {
-            height: 1000px;
-            width: 45px;
-            background-color: #e0eeee;
-            float: right;
-            position: inherit;
+        .add-btn {
+            background-color: #0077b6;
+            color: #fff;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .stuff {
-            display: inline-block;
-            margin-top: 6px;
-            margin-left: 55px;
-            width: 75%;
-            height: 1000px;
+        .add-btn:hover {
+            background-color: #005994;
         }
 
-        p,
-        li {
-            font-family: 'Cormorant Garamond';
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
 
-        .head {
-            font-size: 20px;
-        }
-
-        #name {
-            font-family: Sacramento;
-            float: right;
-            margin-top: 10px;
-            margin-right: 4%;
-        }
-
-        a {
-            color: black;
-            text-decoration: none;
-        }
-
-        @media only screen and (max-width: 430px) {
-            .left,
-            .right {
-                display: none;
-            }
-            .stuff {
-                width: 100%;
-                margin-left: 10px;
-            }
+        ul li {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-<div id="header"></div>
-<div class="left"></div>
-<div class="stuff">
-    <br /><br />
-    <h1>Name: <span th:text="${myData.name}"></span></h1>
-    <h1>Age: <span th:text="${myData.age}"></span></h1>
-    <h1>Resume</h1>
-    <h2>Emily</h2>
-    <hr />
-    <br />
-    <p class="head">Interests</p>
-    <ul>
-        <li>Drawing</li>
-        <li>Photography</li>
-        <li>Design</li>
-        <li>Programming</li>
-        <li>Computer Science</li>
-    </ul>
-    <p class="head">Skills</p>
-    <ul>
-        <li>Web Design with HTML and CSS</li>
-    </ul>
-    <p class="head">Education</p>
-    <ul>
-        <a href="http://www.wiltonhighschool.org/pages/Wilton_High_School">
-            <li>Wilton High School</li>
-        </a>
-        <!--Link-->
-        <a href="https://www.silvermineart.org/">
-            <li>Silvermine School of Arts</li>
-        </a>
-        <li>Codeacademy</li>
-    </ul>
-    <p class="head">Experience</p>
-    <ul>
-        <li>Student Technology Intern for Wilton School District</li>
-        <li>Babysitter</li>
-    </ul>
-    <p class="head">Extracurriculars</p>
-    <ul>
-        <li>Recycling Club</li>
-        <li>Gardening Club</li>
-        <li>Book Club</li>
-    </ul>
+<div class="container">
+    <h1>CV Information</h1>
+    <form action="submit_path_here" method="post" enctype="multipart/form-data">
+
+    <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+
+        <label>Education:</label>
+        <div class="list-input">
+            <input type="text" id="educationInput">
+            <button type="button" class="add-btn" onclick="addItem('educationInput', 'educationList')">Add</button>
+        </div>
+        <ul id="educationList"></ul>
+
+        <label>Work Experience:</label>
+        <div class="list-input">
+            <input type="text" id="experienceInput">
+            <button type="button" class="add-btn" onclick="addItem('experienceInput', 'experienceList')">Add</button>
+        </div>
+        <ul id="experienceList"></ul>
+
+        <label>Skills:</label>
+        <div class="list-input">
+            <input type="text" id="skillsInput">
+            <button type="button" class="add-btn" onclick="addItem('skillsInput', 'skillsList')">Add</button>
+        </div>
+        <ul id="skillsList"></ul>
+
+        <label>Awards and Achievements:</label>
+        <div class="list-input">
+            <input type="text" id="awardsInput">
+            <button type="button" class="add-btn" onclick="addItem('awardsInput', 'awardsList')">Add</button>
+        </div>
+        <ul id="awardsList"></ul>
+
+        <input type="submit" value="Submit">
+    </form>
 </div>
-<div class="right"></div>
-<div id="footer">
-    <h2 id="name">Emily</h2></div>
+
+<script>
+    function addItem(inputId, listId) {
+        const input = document.getElementById(inputId);
+        const list = document.getElementById(listId);
+
+        if (input.value.trim() !== "") {
+            const li = document.createElement('li');
+            li.textContent = input.value;
+            list.appendChild(li);
+
+            // Clear the input for the next entry
+            input.value = "";
+        }
+    }
+</script>
 </body>
 </html>

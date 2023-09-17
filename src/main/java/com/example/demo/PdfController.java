@@ -22,13 +22,11 @@ public class PdfController {
 
     @GetMapping("/generate")
     public ResponseEntity<byte[]> generatePdf() throws Exception {
-        // Create a Thymeleaf context with the template data
         Context context = new Context();
-        // Add the data to the context
-        context.setVariable("myData", new MyData("John Doe", 30)); // Replace with your data
+        context.setVariable("myData", new MyData("John Doe", 30));
 
         // Render HTML using Thymeleaf
-        String html = templateEngine.process("index", context);
+        String html = templateEngine.process("cv-template", context);
 
         // Generate PDF from HTML using Flying Saucer
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
@@ -36,16 +34,12 @@ public class PdfController {
         renderer.setDocumentFromString(html);
         renderer.layout();
         renderer.createPDF(pdfOutputStream);
-
-        // Convert the PDF content to a byte array
         byte[] pdfBytes = pdfOutputStream.toByteArray();
 
-        // Set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "generated.pdf"); // Change the file name if needed
+        headers.setContentDispositionFormData("attachment", "generated.pdf");
 
-        // Return the PDF as a ResponseEntity with appropriate headers
         return ResponseEntity
                 .ok()
                 .headers(headers)
